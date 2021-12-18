@@ -74,3 +74,43 @@ flag = GNI[x, /*in*/ S, include(x, p, q)]{
 					};
 =>
 You can transcompile
+
+
+Timer for logging time and benchmarking
+
+class timer {
+    vector<timer> timers;
+    int n = 0;
+public:
+    double limit = 5;
+    double t = 0;
+    timer() {}
+    timer(int size) : timers(size) {}
+    bool elapses() const {
+        return time() - t > limit;
+    }
+    void measure() {
+        t = time() - t;
+        ++n;
+    }
+    void measure(char id) {
+        timers[id].measure();
+    }
+    void print() {
+        if (n % 2)
+            measure();
+        for (int i = 0; i < 128; ++i) {
+            if (timers[i].n)
+                cerr << (char)i << ' ' << timers[i].t << 's' << endl;
+        }
+        cerr << "  " << t << 's' << endl;
+    }
+    static double time() {
+        using namespace chrono;
+        return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count() / 1000.0;
+    }
+} timer(128);
+
+
+
+
