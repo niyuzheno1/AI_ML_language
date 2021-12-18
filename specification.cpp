@@ -227,4 +227,43 @@ NB.resize(N, 0);
 rep(i, N) NA[i] = A[C[i]], NB[i] = B[C[i]];
 
 		   
+Interval Arithemetics:
+[a;b] discrete interval a, a+1, a+2, a+3, ... , b 
+[a,b] continues interval a, supNotInclude((-infity, a] ), supNotInclude(supNotInclude((-infity, a])) ... b
+[a;b] + c => [a+c; b+c]
+[a;b] * c => [a * c; b * c] given c >= 0 and [b * c; a * c] given c < 0
+[a;b) => {a, a+1, a+2, ... ,b-1}
+Underlying transcompilation:
+[a;b] =>
+//assume that 
+struct DiscreteSegment{
+	int L;
+	int R;
+	DiscreteSegment(int x, int y){
+		L = x;
+		R = y;
+		check();
+	}
+	bool check(){
+		sortE(L, R);
+	}
+	DiscreteSegment operator + (int x){
+		return DiscreteSegment(L + x, R + x);
+	}
+	bool include(int x);
+};
+//end
+DiscreteSegment(a, b);
+[a;b) =>
+DiscreteSegment(a, b-1);						
 
+ 
+Some consequences of interval arithematics:
+bsearch[ll, x, 0, 1000][X](Condition)
+can be equivalent to 
+bsearch[ll, x][0; 1000][X](Condition)
+
+Assume that sgt is a Segment Tree
+sgt.getSum(0, 1000)
+is equivalent to 
+sgt.getSum[0;1000)
