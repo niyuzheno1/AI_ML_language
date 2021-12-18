@@ -267,3 +267,63 @@ Assume that sgt is a Segment Tree
 sgt.getSum(0, 1000)
 is equivalent to 
 sgt.getSum[0;1000)
+	   
+	   
+Timer: read TimeStamp (notice that the function can be inline).
+	inline unsigned long long rdtsc()
+	{
+	#ifdef __amd64
+	  unsigned long long a, d;
+	  __asm__ volatile ("rdtsc" : "=a" (a), "=d" (d));
+	  return (d << 32) | a;
+	#else
+	  unsigned long long x;
+	  __asm__ volatile ("rdtsc" : "=A" (x));
+	  return x;
+	#endif
+	}
+integrate with class timer 
+
+class timer
+{
+    vector<timer> timers;
+    int n = 0;
+public:
+	unsigned long long rdtsc()
+	{
+	#ifdef __amd64
+	  unsigned long long a, d;
+	  __asm__ volatile ("rdtsc" : "=a" (a), "=d" (d));
+	  return (d << 32) | a;
+	#else
+	  unsigned long long x;
+	  __asm__ volatile ("rdtsc" : "=A" (x));
+	  return x;
+	#endif
+	}
+	inline double gettime(){return rdtsc()/2993344000.0;}
+    double limit = 5;
+    double t = 0;
+    timer() {}
+    timer(int size) : timers(size) {}
+    bool elapses() const {
+        return gettime() - t > limit;
+    }
+    void measure() {
+        t = gettime() - t;
+        ++n;
+    }
+    void measure(char id) {
+        timers[id].measure();
+    }
+    void print() {
+        if (n % 2)
+            measure();
+        for (int i = 0; i < 128; ++i) {
+            if (timers[i].n)
+                cerr << (char)i << ' ' << timers[i].t << 's' << endl;
+        }
+        cerr << "  " << t << 's' << endl;
+    }
+
+} timer(128);
