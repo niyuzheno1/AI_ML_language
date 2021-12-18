@@ -194,20 +194,20 @@ public:
     int next(int b) {
         return next() % b;
     }
-    synonymous int operator(int b) : next(b)
+    synonymous int operator(int b) : next
 	
     int next(int a, int b) {
         return next(b - a) + a;
     }
-    synonymous int operator(int a, int b) : next(a, b)
+    synonymous int operator(int a, int b) : next
     double nextDouble(double b = 1) {
         return b * next() / 4294967296.0;
     }
-    synonymous int operator(double a) : nextDouble(a)
+    synonymous int operator(double a) : nextDouble
     double nextDouble(double a, double b) {
         return nextDouble(b - a) + a;
     }
-    synonymous int operator(double a, double b) : nextDouble(a, b)
+    synonymous int operator(double a, double b) : nextDouble
 };
 "synonymous" keyword allows us to bind operator with function or values.
 Example:
