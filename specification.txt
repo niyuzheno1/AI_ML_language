@@ -50,3 +50,27 @@ rd(S(x)) where S is a resizable container or a type
 S (vector) => rep(y, 0, x) rd(w), S.push_back(w);
 S (pii[]) => rep(y,0, x) rd(w.first, w.second);
 where we will further analysis what will be possible replacement for rd and rep
+
+group operator:
+
+flag = GI[x, /*in*/ S, n, t, intersect(nr, x)]{Y} //GI = group include
+=>
+flag = true
+rep(i, n) {
+	if(i == t) continue;
+	x = S[i];
+	if(intersect(nr, x)){
+		flag = false;
+		Y;
+		break;
+	}
+}
+
+flag = GNI[x, /*in*/ S, include(x, p, q)]{
+					rect nr=newrect(S[t],X[t],Y[t],p,q);
+					if(calc_score(nr,R[t])-calc_score(S[t],R[t])>=-(double)_/C0){
+					score+=calc_score(nr,R[t])-calc_score(S[t],R[t]);
+					rect_update(S[t],nr,t);}
+					};
+=>
+You can transcompile
