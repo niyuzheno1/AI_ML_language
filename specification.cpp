@@ -77,7 +77,7 @@ You can transcompile
 
 
 Timer for logging time and benchmarking
-
+//https://atcoder.jp/contests/ahc001/submissions/20926292
 class timer {
     vector<timer> timers;
     int n = 0;
@@ -111,6 +111,59 @@ public:
     }
 } timer(128);
 
+Random Class
 
+class rando {
+    unsigned y;
+public:
+    rando(unsigned y) : y(y) {}
+    unsigned next() {
+        return y ^= (y ^= (y ^= y << 13) >> 17) << 5;
+    }
+    int next(int b) {
+        return next() % b;
+    }
+    int next(int a, int b) {
+        return next(b - a) + a;
+    }
+    double nextDouble(double b = 1) {
+        return b * next() / 4294967296.0;
+    }
+    double nextDouble(double a, double b) {
+        return nextDouble(b - a) + a;
+    }
+    int operator() (int b) {
+        return next(b);
+    }
+}
+
+Integrate with xor128 =>
+		   
+
+		   
+class RandomGenerate {
+    unsigned long x=123456789, y=362436069, z=521288629, w=88675123;
+public:
+    unsigned next() {
+        unsigned long t=(x^(x<<11));
+	x = y; y = z; z = w;
+	return (w=(w^(w>>19))^(t^(t>>8)));
+    }
+    int next(int b) {
+        return next() % b;
+    }
+    int next(int a, int b) {
+        return next(b - a) + a;
+    }
+    double nextDouble(double b = 1) {
+        return b * next() / 4294967296.0;
+    }
+    double nextDouble(double a, double b) {
+        return nextDouble(b - a) + a;
+    }
+    int operator() (int b) {
+        return next(b);
+    }
+}
 
 
