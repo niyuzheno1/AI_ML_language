@@ -180,5 +180,40 @@ struct Ad {
     }
     Y
 };
+		   
+A better and more conscientious approach on getting random number:
+		   
+class RandomGenerate {
+    unsigned long x=123456789, y=362436069, z=521288629, w=88675123;
+public:
+    unsigned next() {
+        unsigned long t=(x^(x<<11));
+	x = y; y = z; z = w;
+	return (w=(w^(w>>19))^(t^(t>>8)));
+    }
+    int next(int b) {
+        return next() % b;
+    }
+    synonymous int operator(int b) : next(b)
+	
+    int next(int a, int b) {
+        return next(b - a) + a;
+    }
+    synonymous int operator(int a, int b) : next(a, b)
+    double nextDouble(double b = 1) {
+        return b * next() / 4294967296.0;
+    }
+    synonymous int operator(double a) : nextDouble(a)
+    double nextDouble(double a, double b) {
+        return nextDouble(b - a) + a;
+    }
+    synonymous int operator(double a, double b) : nextDouble(a, b)
+};
+"synonymous" keyword allows us to bind operator with function or values.
+Example:
+Assume that rnd is of type RandomGenerate
+		   
+rnd(1.0, 3.0) => rnd.nextDouble(1.0, 3.0)
 
+		   
 
