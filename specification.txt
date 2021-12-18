@@ -44,3 +44,9 @@ struct ArrayS_1203_Int{
   void add(int x); // content[sz++] = x
   void erase(int x); // sz--, find where content[y] == x and replace with content x
 };
+
+rd has some extensions
+rd(S(x)) where S is a resizable container or a type
+S (vector) => rep(y, 0, x) rd(w), S.push_back(w);
+S (pii[]) => rep(y,0, x) rd(w.first, w.second);
+where we will further analysis what will be possible replacement for rd and rep
