@@ -165,8 +165,9 @@ public:
 };
 
 Specification
+Create specification for the object that is defined by the problem (such as cars, traffic) etc.
 
-Specification(Ad)[x(int), y, r, x0, y0, x1, y1, score, ix0, iy0, ix1, iy1, rinv(float)].c(x0, y0, x1, y1)
+Specification(Ad)[x(int), y, r, x0, y0, x1, y1, score, ix0, iy0, ix1, iy1, rinv(float)].c(x0, y0, x1, y1){Y}
 => 
 struct Ad {
     int x, y, r, x0, y0, x1, y1, score, ix0, iy0, ix1, iy1;
@@ -177,6 +178,7 @@ struct Ad {
         this->x1 = x1;
         this->y1 = y1;
     }
+    Y
 };
 
 
