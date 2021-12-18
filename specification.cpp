@@ -216,4 +216,15 @@ Assume that rnd is of type RandomGenerate
 rnd(1.0, 3.0) => rnd.nextDouble(1.0, 3.0)
 
 		   
+Random Shuffle:
+RandomShuffleA(N, A, B);
+=> 
+C.resize(N, 0);
+iota(C.begin(), C.end(), 0);
+random_shuffle(C.begin(), C.end());
+NA.resize(N, 0);
+NB.resize(N, 0);
+rep(i, N) NA[i] = A[C[i]], NB[i] = B[C[i]];
+
+		   
 
