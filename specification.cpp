@@ -139,8 +139,6 @@ public:
 
 Integrate with xor128 =>
 		   
-
-		   
 class RandomGenerate {
     unsigned long x=123456789, y=362436069, z=521288629, w=88675123;
 public:
@@ -164,6 +162,21 @@ public:
     int operator() (int b) {
         return next(b);
     }
-}
+};
+
+Specification
+
+Specification(Ad)[x(int), y, r, x0, y0, x1, y1, score, ix0, iy0, ix1, iy1, rinv(float)].c(x0, y0, x1, y1)
+=> 
+struct Ad {
+    int x, y, r, x0, y0, x1, y1, score, ix0, iy0, ix1, iy1;
+    float rinv;
+    Ad(int x0, int y0, int x1, int y1) {
+        this->x0 = x0;
+        this->y0 = y0;
+        this->x1 = x1;
+        this->y1 = y1;
+    }
+};
 
 
