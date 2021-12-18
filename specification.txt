@@ -1,0 +1,46 @@
+Dec 18/19/20 2021
+
+Get random number (https://atcoder.jp/contests/ahc001/submissions/20916667)
+
+xor128() 
+=> 
+unsigned long xor128() {
+  static unsigned long x=123456789, y=362436069, z=521288629, w=88675123;
+  unsigned long t=(x^(x<<11));
+  x=y; y=z; z=w;
+  return (w=(w^(w>>19))^(t^(t>>8)));
+}
+
+Rectangle Class
+struct Rect{
+	int x1,y1,x2,y2;
+	int area();
+  int include(pii x);
+  bool intersect(rect r);
+};
+Storage (Dynamic Array)
+struct ArrayD{
+  int * content;
+  int sz;
+  void malloc();
+  void add(int x); // content[sz++] = x
+  void erase(int x); // sz--, find where content[y] == x and replace with content x
+};
+
+Storage (Static Array)
+struct ArrayS{
+  int content[WSZ];
+  int sz;
+  void add(int x); // content[sz++] = x
+  void erase(int x); // sz--, find where content[y] == x and replace with content x
+};
+Possible usage (subject to changes):
+ArrayS x[1000](1203); 
+will be transcompiled into 
+ArrayS_1203_Int x[1000]; 
+struct ArrayS_1203_Int{
+  int content[1203];
+  int sz;
+  void add(int x); // content[sz++] = x
+  void erase(int x); // sz--, find where content[y] == x and replace with content x
+};
