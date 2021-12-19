@@ -387,3 +387,13 @@ Suppose we have a vector of type int*, if we want to have a vector of type int w
 vector<int*> a; a=[b, c, d] b = 3, c = 10, d = 11
 *a will be a vector of type int
 *a == vector<int> (3, 10, 11)
+
+
+Another way of doing it is to use extra function called map 
+a.map([&](int * & x) {return *x;} );
+which can be transcribed into:
+auto lambda_237414161234 = [&](int * & x) {return *x;}
+vector<int> m;
+for(auto & x : a){
+	m.push_back(lambda_237414161234(x));
+}
