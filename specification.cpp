@@ -334,7 +334,7 @@ Sometimes, because we are able to find the exact formula for the calculus, we do
 
 We can either integrate it with a Wolfram backend and so on.
 Example:
-Integrate[0,1](e^x) will be transcribed into exp(1)-1 
+Integrate[x][0,1](e^x) will be transcribed into exp(1)-1 
 
 Sometimes, it is fairly easy to define function that has different branches
 
@@ -344,3 +344,20 @@ We will have it as in Mathematical form:
 f(x) =  |  x for x in [0,1]
 	|  x^2 for x in (1,2]
 
+We can also use calculus for the case of discrete.
+
+Sum[x][0; 1](x) => 0 + 1 
+
+sum[x][0; N](x) => 0 + 1 + 2 + ... + N
+
+Interval Programming:
+We can split an interval by using 
+[0,1].splitOn(0.5) => vector of [0,0.5), (0.5, 1]
+[0;2].splitOn(1) => vector of [0; 0], [2;2]
+
+Given a vector of intervals, we can also use findIntSeg function to find the interval which contains a specific point
+Assume A is of type vector<Segment> containing [0; 20] [21; 39] [40; 49]
+
+Then we can use 
+A.findIntSeg([10: 10]) => will return vector<Segment*> with a pointer to [0;20].
+A.findIntSeg([10: 30]) => will return vector<Segment*> with a pointer to [0;20] and a pointer to [21; 39].
