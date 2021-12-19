@@ -390,10 +390,11 @@ vector<int*> a; a=[b, c, d] b = 3, c = 10, d = 11
 
 
 Another way of doing it is to use extra function called map 
-a.map([&](int * & x) {return *x;} );
+auto x = a.map([&](int * & x) {return *x;} );
 which can be transcribed into:
 auto lambda_237414161234 = [&](int * & x) {return *x;}
-vector<int> m;
+vector<int> variables_823126312434214;
 for(auto & x : a){
-	m.push_back(lambda_237414161234(x));
+	variables_823126312434214.push_back(lambda_237414161234(x));
 }
+vector<int> x = variables_823126312434214;
