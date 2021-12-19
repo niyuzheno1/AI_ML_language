@@ -406,3 +406,6 @@ for(auto & x_8312645214 : a){
 	x.push_back(lambda_237414161234(x_8312645214));
 }
 
+By using interval, we can greatly replace a lot of unneccessary implementations, such as using forward and backward linked list to find a specific time interval 
+an event happen. We can just define a set of non-overlapping intervals and maintain them. See details over https://atcoder.jp/contests/intro-heuristics/submissions/15202598
+
