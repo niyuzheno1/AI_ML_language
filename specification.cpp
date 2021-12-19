@@ -361,3 +361,24 @@ Assume A is of type vector<Segment> containing [0; 20] [21; 39] [40; 49]
 Then we can use 
 A.findIntSeg([10: 10]) => will return vector<Segment*> with a pointer to [0;20].
 A.findIntSeg([10: 30]) => will return vector<Segment*> with a pointer to [0;20] and a pointer to [21; 39].
+
+Possible way of doing it:
+sortV(n, A)
+A.lower_bound({x, x+1})
+A.lower_bound({y, y+1})
+And we will perturb a little bit and use for loop.
+
+More on interval programming:
+We can also merge interval with interval or interval with vector of Intervals.
+Segment a; // a = [0; 20]
+Segment b; // b = [20; 30]
+a + b => [0;30]
+a ^ b => [20;20]
+*a => 0
+*b => 20
+(a*) => 20
+(b*) => 30
+rep(i, a) <=> rep(i, *a, (a*) + 1) <=> rep(i, a.L, a.R + 1)
+Segment c; // c = [100;200]
+a+c => vector<Segment>([0;20], [100;200])
+					 
