@@ -398,3 +398,11 @@ for(auto & x : a){
 	variables_823126312434214.push_back(lambda_237414161234(x));
 }
 vector<int> x = variables_823126312434214;
+
+We can also use eager substitution and get the following:
+auto lambda_237414161234 = [&](int * & x) {return *x;}
+vector<int> x;
+for(auto & x_8312645214 : a){
+	x.push_back(lambda_237414161234(x_8312645214));
+}
+
