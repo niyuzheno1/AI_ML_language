@@ -409,3 +409,27 @@ for(auto & x_8312645214 : a){
 By using interval, we can greatly replace a lot of unneccessary implementations, such as using forward and backward linked list to find a specific time interval 
 an event happen. We can just define a set of non-overlapping intervals and maintain them. See details over https://atcoder.jp/contests/intro-heuristics/submissions/15202598
 
+
+State(const vi t) : out(t) {
+prv = vvi(26, vi(366, -1));
+nxt = vvi(26, vi(366, 365));
+REP(d,D){
+    REP(i,26) prv[i][d+1] = prv[i][d];
+    prv[out[d]][d+1] = d; //can be written as interval.push_back([last[out[d]]; d)); or something.
+					  //and further we can have last[out[d]] = d;
+}
+REPN(d,D){
+    REP(i,26) nxt[i][d] = nxt[i][d+1];
+    nxt[out[d]][d] = d;
+}
+score = compute_score(out);
+}
+int try_shift(int d, int d2){
+int i = out[d];
+int prev = prv[i][d]; //can be written as (*interval.findIntSeg([d;d]))
+int next = nxt[i][d+1]; //can be written as (interval.findIntSeg([d+1;d+1])*)
+int before = s[d][i] - c[i] * (cost(prev, d, next));
+int after = (d2 == -1 ? -c[i] * cost(prev, next) : 
+	s[d2][i] - c[i] * (cost(prev, d2, next)) );
+return after - before;
+}
