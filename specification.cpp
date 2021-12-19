@@ -382,3 +382,8 @@ rep(i, a) <=> rep(i, *a, (a*) + 1) <=> rep(i, a.L, a.R + 1)
 Segment c; // c = [100;200]
 a+c => vector<Segment>([0;20], [100;200])
 					 
+Dereferencing through mapping:
+Suppose we have a vector of type int*, if we want to have a vector of type int which contain exactly the element that vector points to.
+vector<int*> a; a=[b, c, d] b = 3, c = 10, d = 11
+*a will be a vector of type int
+*a == vector<int> (3, 10, 11)
