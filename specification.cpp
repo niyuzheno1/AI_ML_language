@@ -327,3 +327,20 @@ public:
     }
 
 } timer(128);
+
+Interval Calculus
+We can use continuous interval or discrete interval to faciliate calculus over the interval by using either Simpson Methods or other advanced algorithm.
+Sometimes, because we are able to find the exact formula for the calculus, we do not need to compute the approximated form.
+
+We can either integrate it with a Wolfram backend and so on.
+Example:
+Integrate[0,1](e^x) will be transcribed into exp(1)-1 
+
+Sometimes, it is fairly easy to define function that has different branches
+
+[0,1] * x + (1, 2] * (x ** 2)
+We will have it as in Mathematical form:
+        |  0 for x not in [0,2] 
+f(x) =  |  x for x in [0,1]
+	|  x^2 for x in (1,2]
+
