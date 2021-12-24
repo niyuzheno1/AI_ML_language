@@ -433,3 +433,37 @@ int after = (d2 == -1 ? -c[i] * cost(prev, next) :
 	s[d2][i] - c[i] * (cost(prev, d2, next)) );
 return after - before;
 }
+
+
+
+Code Segments:
+In certain cases, you can use code segment to simplify coding.
+example usage:
+$define begin segment["if_else"][][] 
+	if(a > b){
+		${1}
+	}else{
+		${2}
+	}
+$define end 
+Then we can use if_else[
+	assert(true)
+][
+	assert(false)
+]
+In place of 
+	if(a > b){
+		assert(true)
+	}else{
+		assert(false)
+	}				  
+					  
+					  
+					  
+					  
+					  
+					  
+					  
+					  
+					  
+					  
