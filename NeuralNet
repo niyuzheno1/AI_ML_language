@@ -1,0 +1,86 @@
+struct FullyConnected{
+    string activationFunction;
+    Matrix<double> W;
+    Matrix<double> b;
+};
+
+Matrix<double> relu(Matrix<double> & x){
+    Matrix<double> result(x.r,x.c);
+    for(int i=0;i<x.r;i++){
+        for(int j=0;j<x.c;j++){
+            result[i][j]=max(0.0,x[i][j]);
+        }
+    }
+    return result;
+}
+
+Matrix<double> sigmoid(Matrix<double> & x){
+    Matrix<double> result(x.r,x.c);
+    for(int i=0;i<x.r;i++){
+        for(int j=0;j<x.c;j++){
+            result[i][j]=1.0/(1.0+exp(-x[i][j]));
+        }
+    }
+    return result;
+}
+
+Matrix<double> tanh(Matrix<double> & x){
+    Matrix<double> result(x.r,x.c);
+    for(int i=0;i<x.r;i++){
+        for(int j=0;j<x.c;j++){
+            result[i][j]=tanh(x[i][j]);
+        }
+    }
+    return result;
+}
+
+Matrix<double> softmax(Matrix<double> &x){
+    Matrix<double> result(x.r,x.c);
+    double sumx=0.0;
+    for(int i=0;i<x.r;i++){
+        for(int j=0;j<x.c;j++){
+            sumx+=exp(x[i][j]);
+        }
+    }
+    for(int i=0;i<x.r;i++){
+        for(int j=0;j<x.c;j++){
+            result[i][j]=exp(x[i][j])/sumx;
+        }
+    }
+    return result;
+}
+
+Matrix<double> forward(FullyConnected & fc, Matrix<double> & x){
+    Matrix<double> z = x * fc.W  + fc.b;
+    if(fc.activationFunction == "relu"){
+        return relu(z);
+    }
+    if(fc.activationFunction == "sigmoid"){
+        return sigmoid(z);
+    }
+    if(fc.activationFunction == "tanh"){
+        return tanh(z);
+    }
+    if(fc.activationFunction == "softmax"){
+        return softmax(z);
+    }
+    return z;
+}
+
+void load(FullyConnected & layer, string & filename){
+    ifstream fin(filename.c_str());
+    int N, M;
+    fin >> N >> M >> layer.activationFunction;
+    layer.W = Matrix<double>(N,M);
+    layer.b = Matrix<double>(1,M);
+    for(int i=0;i<N;i++){
+        for(int j=0;j<M;j++){
+            fin >> layer.W[i][j];
+        }
+    }
+    for(int i=0;i<1;i++){
+        for(int j=0;j<M;j++){
+            fin >> layer.b[i][j];
+        }
+    }
+}
